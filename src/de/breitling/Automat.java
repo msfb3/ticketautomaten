@@ -107,7 +107,7 @@ public class Automat {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                BufferedWriter bufferedWriter = new BufferedWriter(writeFile);
+
 
 
 
