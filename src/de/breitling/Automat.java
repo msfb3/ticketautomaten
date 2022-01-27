@@ -84,13 +84,7 @@ public class Automat {
                 double rückgeld = bargeldeingabe - selectedTicket.getPreis();
                 txtRückgeld.setText(Double.toString(rückgeld));
                 File file = new File("Ticket.txt");
-                if (file.exists() == false) {
-                    try {
-                        file.createNewFile();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
+
                 FileWriter writeFile = null;
                 try {
                     writeFile = new FileWriter(file);
