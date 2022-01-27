@@ -1,0 +1,6 @@
+Einzelfahrt
+60.0
+true
+Hamburg
+70.50
+10.5
