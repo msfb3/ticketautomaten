@@ -6,6 +6,10 @@ public class Ticket {
     private boolean gültigkeit;
     private String fahrziel;
 
+    public Ticket() {
+        
+    }
+
     public Ticket(String typ, double preis, String fahrziel) {
         this.typ = typ;
         this.preis = preis;
