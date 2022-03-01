@@ -29,11 +29,11 @@ public class View {
     window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     window.setLayout(new GridLayout(0,2));
 
-        Ticket hamburg = new Ticket("Einzelfahrt",60,"Hamburg");
-        Ticket berlin = new Ticket("Hin- und Rückfahrt", 100,"Berlin");
-        Ticket[] tickets = {hamburg,berlin};
 
-     lblLeer = new JLabel();
+    SQLHandler sqlH = new SQLHandler("localhost:3306", "root", "");
+    Ticket[] tickets = (Ticket[])sqlH.getTickets().toArray();
+
+    lblLeer = new JLabel();
     window.add(lblLeer);
 
     dkpTicket = new JComboBox<>(tickets);

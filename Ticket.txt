@@ -1,6 +1,6 @@
-Einzelfahrt
-60.0
+Hin- und Rückfahrt
+100.0
 true
-Hamburg
-100.00
-40.0
+Berlin
+100
+0.0
