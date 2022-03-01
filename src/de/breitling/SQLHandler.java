@@ -15,17 +15,23 @@ public class SQLHandler {
         this.user = user;
         this.password = password;
     }
-    public List<Ticket> getTickets() {
-        List<Ticket> tickets = new ArrayList<>();
+    public Ticket[] getTickets() {
+        Ticket[] tickets = null;
         Connection con = null;
         try {
             String jdbcConnectionString = "jdbc:mariadb://" + url + "/tickets";
             con = (Connection)DriverManager.getConnection(jdbcConnectionString,
                     user,
                     password);
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM ticket");
+            PreparedStatement stmt = con.prepareStatement("SELECT count(*) FROM ticket");
             ResultSet rs = stmt.executeQuery();
-            while(rs.next()) {
+            rs.next();
+            int count = rs.getInt(1);
+            tickets = new Ticket[count];
+            stmt = con.prepareStatement("SELECT * FROM ticket");
+            rs = stmt.executeQuery();
+            for (int i = 0; i < count; i++) {
+                rs.next();
                 String destination = rs.getString("ziel");
                 int price = rs.getInt("preis");
                 String type = null;
@@ -35,7 +41,7 @@ public class SQLHandler {
                     type = "Hin- und Rück-Ticket";
                 }
                 Ticket ticket = new Ticket(type, price, destination);
-                tickets.add(ticket);
+                tickets[i] = ticket;
             }
         } catch (SQLException sqlEx) {
             System.out.print("Error in SQL! ");

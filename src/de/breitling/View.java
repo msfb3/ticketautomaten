@@ -31,7 +31,7 @@ public class View {
 
 
     SQLHandler sqlH = new SQLHandler("localhost:3306", "root", "");
-    Ticket[] tickets = (Ticket[])sqlH.getTickets().toArray();
+    Ticket[] tickets = (Ticket[])sqlH.getTickets();
 
     lblLeer = new JLabel();
     window.add(lblLeer);
