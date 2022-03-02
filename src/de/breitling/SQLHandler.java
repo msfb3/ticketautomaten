@@ -15,14 +15,18 @@ public class SQLHandler {
         this.user = user;
         this.password = password;
     }
+
+    private Connection openConnection() throws SQLException {
+        String jdbcConnectionString = "jdbc:mariadb://" + url + "/tickets";
+        return (Connection)DriverManager.getConnection(jdbcConnectionString,
+                user,
+                password);
+    }
     public Ticket[] getTickets() {
         Ticket[] tickets = null;
         Connection con = null;
         try {
-            String jdbcConnectionString = "jdbc:mariadb://" + url + "/tickets";
-            con = (Connection)DriverManager.getConnection(jdbcConnectionString,
-                    user,
-                    password);
+            con = openConnection();
             PreparedStatement stmt = con.prepareStatement("SELECT count(*) FROM ticket");
             ResultSet rs = stmt.executeQuery();
             rs.next();
@@ -56,5 +60,21 @@ public class SQLHandler {
             }
         }
         return tickets;
+    }
+
+    public void createArchiveTicket(Ticket ticket, double moneyGiven, double moneyReturned) {
+        try {
+            Connection con = openConnection();
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO archive (price, is_valid, destination, money_given, money_returned) " +
+                    "VALUES (?,?,?,?,?");
+            stmt.setDouble(1,ticket.getPreis());
+            stmt.setBoolean(2, ticket.isGültigkeit());
+            stmt.setString(3,ticket.getFahrziel());
+            stmt.setDouble(4,moneyGiven);
+            stmt.setDouble(5,moneyReturned);
+            int rowsAffechted = stmt.executeUpdate();
+        } catch (SQLException sqlEX) {
+
+        }
     }
 }

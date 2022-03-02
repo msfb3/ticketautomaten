@@ -30,7 +30,7 @@ public class View {
     window.setLayout(new GridLayout(0,2));
 
 
-    SQLHandler sqlH = new SQLHandler("localhost:3306", "root", "");
+    SQLHandler sqlH = new SQLHandler(SQLConfig.SQL_URL, SQLConfig.SQL_USER, SQLConfig.SQL_PASSWORD);
     Ticket[] tickets = (Ticket[])sqlH.getTickets();
 
     lblLeer = new JLabel();

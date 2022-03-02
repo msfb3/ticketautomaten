@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 
 public class Controller {
     private View view;
@@ -40,24 +41,10 @@ public class Controller {
                 view.getTxtRückgeld().setText(Double.toString(rückgeld));
 
 
-                File file = new File("Ticket.txt");
-
-                FileWriter writeFile = null;
-                try {
-                    writeFile = new FileWriter(file);
-                    writeFile.write(view.getTxtTyp().getText() + "\n");
-                    writeFile.write(view.getTxtPreis().getText() + "\n");
-                    writeFile.write(view.getTxtGültigkeit().getText() + "\n");
-                    writeFile.write(view.getTxtFahrziel().getText() + "\n");
-                    writeFile.write(view.getTxtBargeld().getText() + "\n");
-                    writeFile.write(view.getTxtRückgeld().getText() + "\n");
+                SQLHandler sqlH = new SQLHandler(SQLConfig.SQL_URL,SQLConfig.SQL_USER, SQLConfig.SQL_PASSWORD);
+                sqlH.createArchiveTicket(selectedTicket, bargeldeingabe, rückgeld);
 
 
-                    writeFile.close();
-
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
 
 
 
