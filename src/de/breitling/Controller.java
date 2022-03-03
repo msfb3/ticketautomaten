@@ -48,8 +48,13 @@ public class Controller {
 
 
 
-
-
+            }
+        });
+        view.getCmdLöschen().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SQLHandler sqlH = new SQLHandler(SQLConfig.SQL_URL,SQLConfig.SQL_USER, SQLConfig.SQL_PASSWORD);
+                sqlH.deleteArchiveTicket();
             }
         });
     }

@@ -66,15 +66,24 @@ public class SQLHandler {
         try {
             Connection con = openConnection();
             PreparedStatement stmt = con.prepareStatement("INSERT INTO archive (price, is_valid, destination, money_given, money_returned) " +
-                    "VALUES (?,?,?,?,?");
+                    "VALUES (?,?,?,?,?)");
             stmt.setDouble(1,ticket.getPreis());
             stmt.setBoolean(2, ticket.isGültigkeit());
             stmt.setString(3,ticket.getFahrziel());
             stmt.setDouble(4,moneyGiven);
             stmt.setDouble(5,moneyReturned);
-            int rowsAffechted = stmt.executeUpdate();
+            stmt.executeQuery();
         } catch (SQLException sqlEX) {
-
+            System.out.println("Something went wrong with saving the Ticket" + sqlEX.getMessage());
+        }
+    }
+    public void deleteArchiveTicket() {
+        try {
+            Connection con = openConnection();
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM archive");
+            stmt.executeQuery();
+        } catch (SQLException sqlEx) {
+            System.out.println("Something went wrong with deleting the Tickets. " +sqlEx.getMessage());
         }
     }
 }

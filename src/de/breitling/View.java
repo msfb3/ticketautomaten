@@ -20,6 +20,7 @@ public class View {
     private JLabel lblRückgeld;
     private JTextField txtRückgeld;
     private JButton cmdDrucken;
+    private JButton cmdLöschen;
 
 
 
@@ -71,6 +72,8 @@ public class View {
     cmdDrucken = new JButton("Drucken");
     window.add(cmdDrucken);
 
+    cmdLöschen = new JButton("Löschen");
+    window.add(cmdLöschen);
 
     window.setVisible(true);
 
@@ -135,6 +138,9 @@ public class View {
         return cmdDrucken;
     }
 
+    public JButton getCmdLöschen() {
+        return cmdLöschen;
+    }
 
     public void setTxtTyp(JTextField txtTyp) {
         this.txtTyp = txtTyp;
