@@ -72,7 +72,7 @@ public class View {
     cmdDrucken = new JButton("Drucken");
     window.add(cmdDrucken);
 
-    cmdLöschen = new JButton("Löschen");
+    cmdLöschen = new JButton("Loeschen");
     window.add(cmdLöschen);
 
     window.setVisible(true);
