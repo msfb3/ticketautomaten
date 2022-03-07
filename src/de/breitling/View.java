@@ -20,7 +20,7 @@ public class View {
     private JLabel lblRückgeld;
     private JTextField txtRückgeld;
     private JButton cmdDrucken;
-    private JButton cmdLöschen;
+    private JButton cmdLoeschen;
 
 
 
@@ -31,7 +31,7 @@ public class View {
     window.setLayout(new GridLayout(0,2));
 
 
-    SQLHandler sqlH = new SQLHandler(SQLConfig.SQL_URL, SQLConfig.SQL_USER, SQLConfig.SQL_PASSWORD);
+    SQLHandler sqlH =  SQLHandler.getInstance(SQLConfig.SQL_URL, SQLConfig.SQL_USER, SQLConfig.SQL_PASSWORD);
     Ticket[] tickets = (Ticket[])sqlH.getTickets();
 
     lblLeer = new JLabel();
@@ -72,8 +72,8 @@ public class View {
     cmdDrucken = new JButton("Drucken");
     window.add(cmdDrucken);
 
-    cmdLöschen = new JButton("Loeschen");
-    window.add(cmdLöschen);
+    cmdLoeschen = new JButton("Loeschen");
+    window.add(cmdLoeschen);
 
     window.setVisible(true);
 
@@ -138,8 +138,8 @@ public class View {
         return cmdDrucken;
     }
 
-    public JButton getCmdLöschen() {
-        return cmdLöschen;
+    public JButton getCmdLoeschen() {
+        return cmdLoeschen;
     }
 
     public void setTxtTyp(JTextField txtTyp) {

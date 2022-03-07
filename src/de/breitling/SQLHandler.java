@@ -10,10 +10,19 @@ public class SQLHandler {
     private String url;
     private String user;
     private String password;
-    public SQLHandler(String url, String user, String password) {
+
+    private static SQLHandler instance;
+    private SQLHandler(String url, String user, String password) {
         this.url = url;
         this.user = user;
         this.password = password;
+    }
+
+    public static SQLHandler getInstance(String url, String user, String password) {
+        if (instance == null) {
+            instance = new SQLHandler(url, user, password);
+        }
+        return instance;
     }
 
     private Connection openConnection() throws SQLException {
@@ -73,6 +82,8 @@ public class SQLHandler {
             stmt.setDouble(4,moneyGiven);
             stmt.setDouble(5,moneyReturned);
             stmt.executeQuery();
+            stmt.close();
+            con.close();
         } catch (SQLException sqlEX) {
             System.out.println("Something went wrong with saving the Ticket" + sqlEX.getMessage());
         }
@@ -82,6 +93,8 @@ public class SQLHandler {
             Connection con = openConnection();
             PreparedStatement stmt = con.prepareStatement("DELETE FROM archive");
             stmt.executeQuery();
+            stmt.close();
+            con.close();
         } catch (SQLException sqlEx) {
             System.out.println("Something went wrong with deleting the Tickets. " +sqlEx.getMessage());
         }

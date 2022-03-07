@@ -41,7 +41,7 @@ public class Controller {
                 view.getTxtRückgeld().setText(Double.toString(rückgeld));
 
 
-                SQLHandler sqlH = new SQLHandler(SQLConfig.SQL_URL,SQLConfig.SQL_USER, SQLConfig.SQL_PASSWORD);
+                SQLHandler sqlH =  SQLHandler.getInstance(SQLConfig.SQL_URL,SQLConfig.SQL_USER, SQLConfig.SQL_PASSWORD);
                 sqlH.createArchiveTicket(selectedTicket, bargeldeingabe, rückgeld);
 
 
@@ -50,10 +50,10 @@ public class Controller {
 
             }
         });
-        view.getCmdLöschen().addActionListener(new ActionListener() {
+        view.getCmdLoeschen().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SQLHandler sqlH = new SQLHandler(SQLConfig.SQL_URL,SQLConfig.SQL_USER, SQLConfig.SQL_PASSWORD);
+                SQLHandler sqlH = SQLHandler.getInstance(SQLConfig.SQL_URL,SQLConfig.SQL_USER, SQLConfig.SQL_PASSWORD);
                 sqlH.deleteArchiveTicket();
             }
         });
